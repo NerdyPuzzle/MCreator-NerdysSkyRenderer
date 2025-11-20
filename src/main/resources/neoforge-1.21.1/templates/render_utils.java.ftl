@@ -1,81 +1,81 @@
 package ${package}.client;
 
 public class RenderUtils {
-    public static final ResourceLocation SUN_LOCATION = ResourceLocation.withDefaultNamespace("textures/environment/sun.png");
-    public static final ResourceLocation MOON_LOCATION = ResourceLocation.withDefaultNamespace("textures/environment/moon_phases.png");
-    private static final Minecraft mc = Minecraft.getInstance();
+	public static final ResourceLocation SUN_LOCATION = ResourceLocation.withDefaultNamespace("textures/environment/sun.png");
+	public static final ResourceLocation MOON_LOCATION = ResourceLocation.withDefaultNamespace("textures/environment/moon_phases.png");
+	private static final Minecraft mc = Minecraft.getInstance();
 
-    public static void swapVanillaTexture(ResourceLocation original, ResourceLocation replacement) {
-        TextureManager textureManager = mc.getTextureManager();
-        SimpleTexture newTexture = new SimpleTexture(replacement);
-        newTexture.bind();
-        textureManager.register(original, newTexture);
-    }
+	public static void swapVanillaTexture(ResourceLocation original, ResourceLocation replacement) {
+		TextureManager textureManager = mc.getTextureManager();
+		SimpleTexture newTexture = new SimpleTexture(replacement);
+		newTexture.bind();
+		textureManager.register(original, newTexture);
+	}
 
-    public static void renderCustomSun(RenderLevelStageEvent event, ResourceLocation texture) {
-        PoseStack posestack = event.getPoseStack();
-        posestack.pushPose();
-        posestack.mulPose(event.getModelViewMatrix());
+	public static void renderCustomSun(RenderLevelStageEvent event, ResourceLocation texture) {
+		PoseStack posestack = event.getPoseStack();
+		posestack.pushPose();
+		posestack.mulPose(event.getModelViewMatrix());
 		GlStateManager._enableBlend();
 		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager._depthMask(false);
-        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
-        float f11 = 1.0F - mc.getInstance().player.level().getRainLevel(partialTick);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, f11);
-        posestack.mulPose(Axis.YP.rotationDegrees(-90.0F));
-        posestack.mulPose(Axis.XP.rotationDegrees(mc.getInstance().player.level().getTimeOfDay(partialTick) * 360.0F));
-        Matrix4f matrix4f1 = posestack.last().pose();
-        float f12 = 30.0F;
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, texture);
-        BufferBuilder bufferbuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        bufferbuilder.addVertex(matrix4f1, -f12, 100.0F, -f12).setUv(0.0F, 0.0F);
-        bufferbuilder.addVertex(matrix4f1, f12, 100.0F, -f12).setUv(1.0F, 0.0F);
-        bufferbuilder.addVertex(matrix4f1, f12, 100.0F, f12).setUv(1.0F, 1.0F);
-        bufferbuilder.addVertex(matrix4f1, -f12, 100.0F, f12).setUv(0.0F, 1.0F);
-        BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
+		float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
+		float f11 = 1.0F - mc.getInstance().player.level().getRainLevel(partialTick);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, f11);
+		posestack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+		posestack.mulPose(Axis.XP.rotationDegrees(mc.getInstance().player.level().getTimeOfDay(partialTick) * 360.0F));
+		Matrix4f matrix4f1 = posestack.last().pose();
+		float f12 = 30.0F;
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderTexture(0, texture);
+		BufferBuilder bufferbuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferbuilder.addVertex(matrix4f1, -f12, 100.0F, -f12).setUv(0.0F, 0.0F);
+		bufferbuilder.addVertex(matrix4f1, f12, 100.0F, -f12).setUv(1.0F, 0.0F);
+		bufferbuilder.addVertex(matrix4f1, f12, 100.0F, f12).setUv(1.0F, 1.0F);
+		bufferbuilder.addVertex(matrix4f1, -f12, 100.0F, f12).setUv(0.0F, 1.0F);
+		BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager._disableBlend();
 		RenderSystem.defaultBlendFunc();
 		GlStateManager._depthMask(true);
-        posestack.popPose();
-    }
+		posestack.popPose();
+	}
 
-    public static void renderCustomMoon(RenderLevelStageEvent event, ResourceLocation texture) {
-        PoseStack posestack = event.getPoseStack();
-        posestack.pushPose();
-        posestack.mulPose(event.getModelViewMatrix());
+	public static void renderCustomMoon(RenderLevelStageEvent event, ResourceLocation texture) {
+		PoseStack posestack = event.getPoseStack();
+		posestack.pushPose();
+		posestack.mulPose(event.getModelViewMatrix());
 		GlStateManager._enableBlend();
 		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager._depthMask(false);
-        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
-        float f11 = 1.0F - mc.getInstance().player.level().getRainLevel(partialTick);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, f11);
-        posestack.mulPose(Axis.YP.rotationDegrees(-90.0F));
-        posestack.mulPose(Axis.XP.rotationDegrees(mc.getInstance().player.level().getTimeOfDay(partialTick) * 360.0F));
-        Matrix4f matrix4f1 = posestack.last().pose();
-        float f12 = 20.0F;
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, texture);
-        int k = mc.getInstance().player.level().getMoonPhase();
-        int l = k % 4;
-        int i1 = k / 4 % 2;
-        float f13 = (float)(l + 0) / 4.0F;
-        float f14 = (float)(i1 + 0) / 2.0F;
-        float f15 = (float)(l + 1) / 4.0F;
-        float f16 = (float)(i1 + 1) / 2.0F;
-        BufferBuilder bufferbuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        bufferbuilder.addVertex(matrix4f1, -f12, -100.0F, f12).setUv(f15, f16);
-        bufferbuilder.addVertex(matrix4f1, f12, -100.0F, f12).setUv(f13, f16);
-        bufferbuilder.addVertex(matrix4f1, f12, -100.0F, -f12).setUv(f13, f14);
-        bufferbuilder.addVertex(matrix4f1, -f12, -100.0F, -f12).setUv(f15, f14);
-        BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
+		float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
+		float f11 = 1.0F - mc.getInstance().player.level().getRainLevel(partialTick);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, f11);
+		posestack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+		posestack.mulPose(Axis.XP.rotationDegrees(mc.getInstance().player.level().getTimeOfDay(partialTick) * 360.0F));
+		Matrix4f matrix4f1 = posestack.last().pose();
+		float f12 = 20.0F;
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderTexture(0, texture);
+		int k = mc.getInstance().player.level().getMoonPhase();
+		int l = k % 4;
+		int i1 = k / 4 % 2;
+		float f13 = (float)(l + 0) / 4.0F;
+		float f14 = (float)(i1 + 0) / 2.0F;
+		float f15 = (float)(l + 1) / 4.0F;
+		float f16 = (float)(i1 + 1) / 2.0F;
+		BufferBuilder bufferbuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferbuilder.addVertex(matrix4f1, -f12, -100.0F, f12).setUv(f15, f16);
+		bufferbuilder.addVertex(matrix4f1, f12, -100.0F, f12).setUv(f13, f16);
+		bufferbuilder.addVertex(matrix4f1, f12, -100.0F, -f12).setUv(f13, f14);
+		bufferbuilder.addVertex(matrix4f1, -f12, -100.0F, -f12).setUv(f15, f14);
+		BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager._disableBlend();
 		RenderSystem.defaultBlendFunc();
 		GlStateManager._depthMask(true);
-        posestack.popPose();
-    }
+		posestack.popPose();
+	}
 
 	public static void renderCustomSkybox(RenderLevelStageEvent event, ResourceLocation texture, int color, float alpha) {
 		PoseStack poseStack = event.getPoseStack();
@@ -92,12 +92,12 @@ public class RenderUtils {
 		Tesselator tesselator = Tesselator.getInstance();
 		float distance = 100.0F;
 		float size = 100.0F;
-        renderSkyboxQuad(poseStack, tesselator, -size, distance, -size, 1.0F / 4.0F, 1.0F / 3.0F, size, distance, -size, 2.0F / 4.0F, 1.0F / 3.0F, size, distance, size, 2.0F / 4.0F, 0.0F, -size, distance, size, 1.0F / 4.0F, 0.0F);
-        renderSkyboxQuad(poseStack, tesselator, -size, -distance, -size, 1.0F / 4.0F, 2.0F / 3.0F, -size, -distance, size, 1.0F / 4.0F, 3.0F / 3.0F, size, -distance, size, 2.0F / 4.0F, 3.0F / 3.0F, size, -distance, -size, 2.0F / 4.0F, 2.0F / 3.0F);
-        renderSkyboxQuad(poseStack, tesselator, -distance, -size, size, 0.0F, 2.0F / 3.0F, -distance, -size, -size, 1.0F / 4.0F, 2.0F / 3.0F, -distance, size, -size, 1.0F / 4.0F, 1.0F / 3.0F, -distance, size, size, 0.0F, 1.0F / 3.0F);
-        renderSkyboxQuad(poseStack, tesselator, -size, -size, -distance, 1.0F / 4.0F, 2.0F / 3.0F, size, -size, -distance, 2.0F / 4.0F, 2.0F / 3.0F, size, size, -distance, 2.0F / 4.0F, 1.0F / 3.0F, -size, size, -distance, 1.0F / 4.0F, 1.0F / 3.0F);
-        renderSkyboxQuad(poseStack, tesselator, distance, -size, -size, 2.0F / 4.0F, 2.0F / 3.0F, distance, -size, size, 3.0F / 4.0F, 2.0F / 3.0F, distance, size, size, 3.0F / 4.0F, 1.0F / 3.0F, distance, size, -size, 2.0F / 4.0F, 1.0F / 3.0F);
-        renderSkyboxQuad(poseStack, tesselator, size, -size, distance, 3.0F / 4.0F, 2.0F / 3.0F, -size, -size, distance, 4.0F / 4.0F, 2.0F / 3.0F, -size, size, distance, 4.0F / 4.0F, 1.0F / 3.0F, size, size, distance, 3.0F / 4.0F, 1.0F / 3.0F);
+		renderSkyboxQuad(poseStack, tesselator, -size, distance, -size, 1.0F / 4.0F, 1.0F / 3.0F, size, distance, -size, 2.0F / 4.0F, 1.0F / 3.0F, size, distance, size, 2.0F / 4.0F, 0.0F, -size, distance, size, 1.0F / 4.0F, 0.0F);
+		renderSkyboxQuad(poseStack, tesselator, -size, -distance, -size, 1.0F / 4.0F, 2.0F / 3.0F, -size, -distance, size, 1.0F / 4.0F, 3.0F / 3.0F, size, -distance, size, 2.0F / 4.0F, 3.0F / 3.0F, size, -distance, -size, 2.0F / 4.0F, 2.0F / 3.0F);
+		renderSkyboxQuad(poseStack, tesselator, -distance, -size, size, 0.0F, 2.0F / 3.0F, -distance, -size, -size, 1.0F / 4.0F, 2.0F / 3.0F, -distance, size, -size, 1.0F / 4.0F, 1.0F / 3.0F, -distance, size, size, 0.0F, 1.0F / 3.0F);
+		renderSkyboxQuad(poseStack, tesselator, -size, -size, -distance, 1.0F / 4.0F, 2.0F / 3.0F, size, -size, -distance, 2.0F / 4.0F, 2.0F / 3.0F, size, size, -distance, 2.0F / 4.0F, 1.0F / 3.0F, -size, size, -distance, 1.0F / 4.0F, 1.0F / 3.0F);
+		renderSkyboxQuad(poseStack, tesselator, distance, -size, -size, 2.0F / 4.0F, 2.0F / 3.0F, distance, -size, size, 3.0F / 4.0F, 2.0F / 3.0F, distance, size, size, 3.0F / 4.0F, 1.0F / 3.0F, distance, size, -size, 2.0F / 4.0F, 1.0F / 3.0F);
+		renderSkyboxQuad(poseStack, tesselator, size, -size, distance, 3.0F / 4.0F, 2.0F / 3.0F, -size, -size, distance, 4.0F / 4.0F, 2.0F / 3.0F, -size, size, distance, 4.0F / 4.0F, 1.0F / 3.0F, size, size, distance, 3.0F / 4.0F, 1.0F / 3.0F);
 		RenderSystem.setShaderColor(1, 1, 1, 1);
 		GlStateManager._enableCull();
 		GlStateManager._depthMask(true);
@@ -116,11 +116,11 @@ public class RenderUtils {
 		BufferUploader.drawWithShader(buffer.buildOrThrow());
 	}
 
-    public static int[] getRGB(int hexColor) {
-        int[] rgb = new int[3];
-        rgb[0] = (hexColor >> 16) & 0xFF;
-        rgb[1] = (hexColor >> 8) & 0xFF;
-        rgb[2] = hexColor & 0xFF;
-        return rgb;
-    }
+	public static int[] getRGB(int hexColor) {
+		int[] rgb = new int[3];
+		rgb[0] = (hexColor >> 16) & 0xFF;
+		rgb[1] = (hexColor >> 8) & 0xFF;
+		rgb[2] = hexColor & 0xFF;
+		return rgb;
+	}
 }
