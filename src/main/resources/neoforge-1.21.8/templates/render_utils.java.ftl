@@ -15,6 +15,7 @@ public class RenderUtils {
 		posestack.pushPose();
 		GlStateManager._enableBlend();
 		GlStateManager._depthMask(false);
+		GlStateManager._blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE, GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
 		float f11 = 1.0F - mc.getInstance().player.level().getRainLevel(partialTick);
 		posestack.mulPose(Axis.YP.rotationDegrees(-90.0F));
@@ -38,6 +39,7 @@ public class RenderUtils {
 		posestack.pushPose();
 		GlStateManager._enableBlend();
 		GlStateManager._depthMask(false);
+		GlStateManager._blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE, GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
 		float f11 = 1.0F - mc.getInstance().player.level().getRainLevel(partialTick);
 		posestack.mulPose(Axis.YP.rotationDegrees(-90.0F));
@@ -82,7 +84,6 @@ public class RenderUtils {
 		renderSkyboxQuad(poseStack, vertexConsumer, colorWithAlpha, size, -size, distance, 3.0F / 4.0F, 2.0F / 3.0F, -size, -size, distance, 4.0F / 4.0F, 2.0F / 3.0F, -size, size, distance, 4.0F / 4.0F, 1.0F / 3.0F, size, size, distance, 3.0F / 4.0F, 1.0F / 3.0F);
 		bufferSource.endBatch();
 		GlStateManager._depthMask(true);
-		GlStateManager._blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE, GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		GlStateManager._disableBlend();
 		poseStack.popPose();
 	}

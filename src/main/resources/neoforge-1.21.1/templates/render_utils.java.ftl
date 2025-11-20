@@ -82,13 +82,12 @@ public class RenderUtils {
 		poseStack.pushPose();
 		poseStack.mulPose(event.getModelViewMatrix());
 		GlStateManager._enableBlend();
-		GlStateManager._blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value, GlStateManager.SourceFactor.ONE.value, GlStateManager.DestFactor.ZERO.value);
+		RenderSystem.defaultBlendFunc();
 		GlStateManager._depthMask(false);
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderTexture(0, texture);
 		int[] rgb = getRGB(color);
 		RenderSystem.setShaderColor((float) rgb[0] / 255, (float) rgb[1] / 255, (float) rgb[2] / 255, alpha);
-		GlStateManager._disableCull();
 		Tesselator tesselator = Tesselator.getInstance();
 		float distance = 100.0F;
 		float size = 100.0F;
@@ -99,7 +98,6 @@ public class RenderUtils {
 		renderSkyboxQuad(poseStack, tesselator, distance, -size, -size, 2.0F / 4.0F, 2.0F / 3.0F, distance, -size, size, 3.0F / 4.0F, 2.0F / 3.0F, distance, size, size, 3.0F / 4.0F, 1.0F / 3.0F, distance, size, -size, 2.0F / 4.0F, 1.0F / 3.0F);
 		renderSkyboxQuad(poseStack, tesselator, size, -size, distance, 3.0F / 4.0F, 2.0F / 3.0F, -size, -size, distance, 4.0F / 4.0F, 2.0F / 3.0F, -size, size, distance, 4.0F / 4.0F, 1.0F / 3.0F, size, size, distance, 3.0F / 4.0F, 1.0F / 3.0F);
 		RenderSystem.setShaderColor(1, 1, 1, 1);
-		GlStateManager._enableCull();
 		GlStateManager._depthMask(true);
 		GlStateManager._disableBlend();
 		poseStack.popPose();

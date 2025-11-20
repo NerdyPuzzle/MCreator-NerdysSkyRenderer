@@ -5,7 +5,7 @@
   ],
   "info": {
     "name": "Nerdy's Sky Renderer",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "Allows for controlling the rendering of sky-related effects",
     "author": "NerdyPuzzle"
   }
