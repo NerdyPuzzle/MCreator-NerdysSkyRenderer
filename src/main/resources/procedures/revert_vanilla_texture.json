@@ -1,0 +1,40 @@
+{
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "vanilla",
+      "options": [
+        [
+          "Sun",
+          "SUN"
+        ],
+        [
+          "Moon",
+          "MOON"
+        ]
+      ]
+    },
+    {
+      "type": "field_image",
+      "src": "./res/client.png",
+      "width": 8,
+      "height": 24
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#03a5ad",
+  "mcreator": {
+    "toolbox_id": "sky",
+    "fields": [
+      "vanilla"
+    ],
+    "dependencies": [
+      {
+        "name": "skyRenderEvent",
+        "type": "skyRenderEvent"
+      }
+    ]
+  }
+}

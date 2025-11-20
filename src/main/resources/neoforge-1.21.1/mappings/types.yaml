@@ -1,0 +1,3 @@
+skyRenderEvent: RenderLevelStageEvent
+fogRenderEvent: ViewportEvent.RenderFog
+posestack: PoseStack

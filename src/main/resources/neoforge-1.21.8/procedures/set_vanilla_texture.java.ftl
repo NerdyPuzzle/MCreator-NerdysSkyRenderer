@@ -1,0 +1,1 @@
+RenderUtils.swapVanillaTexture(RenderUtils.${field$vanilla}_LOCATION, ResourceLocation.parse(${input$texture}));

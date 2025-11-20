@@ -1,0 +1,1 @@
+RenderUtils.renderCustomSkybox(skyRenderEvent, ResourceLocation.parse(${input$texture}), 0x${(field$color!"#ffffff")?substring(1)}, Math.min(${opt.toFloat(input$alpha)}, 1));
