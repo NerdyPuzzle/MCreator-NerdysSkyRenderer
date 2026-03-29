@@ -2,8 +2,7 @@
   "id": "nerdys_sky_renderer",
   "supportedversions": [
     2025003,
-    2026001,
-    202600110319
+    2026001
   ],
   "info": {
     "name": "Nerdy's Sky Renderer",
