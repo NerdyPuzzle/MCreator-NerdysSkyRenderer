@@ -1,12 +1,11 @@
 {
   "id": "nerdys_sky_renderer",
   "supportedversions": [
-    2025003,
-    2026001
+    2026002
   ],
   "info": {
     "name": "Nerdy's Sky Renderer",
-    "version": "1.1",
+    "version": "1.2",
     "description": "Allows for controlling the rendering of sky-related effects",
     "author": "NerdyPuzzle"
   }

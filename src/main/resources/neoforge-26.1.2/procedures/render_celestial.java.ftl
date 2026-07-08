@@ -1,0 +1,1 @@
+RenderUtils.renderCustom${field$celestial}(skyRenderEvent, Identifier.parse(${input$texture}));
